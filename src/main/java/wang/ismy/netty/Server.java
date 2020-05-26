@@ -13,10 +13,10 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
  * @author MY
  * @date 2020/5/17 16:15
  */
-public class DiscardServer {
+public class Server {
     private int port;
 
-    public DiscardServer(int port) {
+    public Server(int port) {
         this.port = port;
     }
 
@@ -35,7 +35,7 @@ public class DiscardServer {
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         public void initChannel(SocketChannel ch) throws Exception {
-                            ch.pipeline().addLast(new DiscardServerHandler());
+                            ch.pipeline().addLast(new TimeServerHandler());
                         }
                     })
                     // 指定一些参数（针对到来的连接）
@@ -62,6 +62,6 @@ public class DiscardServer {
             port = Integer.parseInt(args[0]);
         }
 
-        new DiscardServer(port).run();
+        new Server(port).run();
     }
 }
